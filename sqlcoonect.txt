@@ -1,0 +1,74 @@
+-- Connect to PostgreSQL and create a database
+CREATE DATABASE hospital_management;
+
+-- Connect to the hospital_management database
+\c hospital_management;
+
+CREATE DATABASE hospital_management;
+
+\c hospital_management
+
+CREATE TABLE Patient (
+    PID SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    sex TEXT,
+    address TEXT,
+    contact TEXT,
+    age INTEGER
+);
+
+CREATE TABLE Doctor (
+    Doc_ID SERIAL PRIMARY KEY,
+    Doc_Name TEXT NOT NULL,
+    Hospital TEXT,
+    Disc_ID TEXT,
+    contact TEXT,
+    Addr1 TEXT,
+    Addr2 TEXT
+);
+
+CREATE TABLE Medicine (
+    Drug_ID SERIAL PRIMARY KEY,
+    DrugName TEXT NOT NULL,
+    MfgDate DATE,
+    ExpDate DATE,
+    Quantity INTEGER,
+    Price NUMERIC(10, 2),
+    Manufacturer TEXT
+);
+
+CREATE TABLE Hospital (
+    HospitalID SERIAL PRIMARY KEY,
+    Hos_Name TEXT NOT NULL,
+    Location TEXT,
+    State TEXT,
+    City TEXT,
+    PinCode TEXT
+);
+
+CREATE TABLE Pharmacy (
+    StoreID SERIAL PRIMARY KEY,
+    StoreName TEXT NOT NULL,
+    Location TEXT,
+    State TEXT,
+    City TEXT,
+    PinCode TEXT
+);
+
+CREATE TABLE Bill (
+    BILL_ID SERIAL PRIMARY KEY,
+    Amt NUMERIC(10, 2),
+    Quantity INTEGER,
+    Drug_ID INTEGER REFERENCES Medicine(Drug_ID),
+    Doc_ID INTEGER REFERENCES Doctor(Doc_ID),
+    PID INTEGER REFERENCES Patient(PID)
+);
+
+CREATE TABLE Employee (
+    EID SERIAL PRIMARY KEY,
+    EmpName TEXT NOT NULL,
+    Salary NUMERIC(10, 2),
+    Sex TEXT,
+    NID TEXT,
+    E_address TEXT
+);
